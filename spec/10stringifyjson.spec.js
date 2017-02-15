@@ -17,6 +17,9 @@ describe("stringifyjson()", function() {
   it('should return an unaltered array', function () {
       expect(stringifyjson([])).to.equal('[]');
   });
+  it('should return undefined if string is undefined', function () {
+      expect(stringifyjson(undefined)).to.equal(undefined);
+  });
   it('returns an unaltered number', function () {
       expect(stringifyjson(1)).to.equal(1);
   });
@@ -28,6 +31,12 @@ describe("stringifyjson()", function() {
   });
   it('returns a string of an object with the elements inside stringified', function () {
       var json = {x: 6, b: 8, c: 'hello', d: [], e: true, f: {}};
+      var actual = stringifyjson(json);
+      var expected = JSON.stringify(json);
+      expect(actual).to.equal(expected);      
+  });
+  it('works recursively', function () {
+      var json = [ {a: 1, b:2, c:{d:3,e:4}}, [true, "hi", [{}]]  ];
       var actual = stringifyjson(json);
       var expected = JSON.stringify(json);
       expect(actual).to.equal(expected);      
