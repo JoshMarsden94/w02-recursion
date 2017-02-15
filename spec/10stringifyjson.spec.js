@@ -41,4 +41,7 @@ describe("stringifyjson()", function() {
       var expected = JSON.stringify(json);
       expect(actual).to.equal(expected);      
   });
+  it('stringifies correctly for undefined inside objects', function () {
+      expect(stringifyjson({a: 1, b: undefined})).to.equal('{"a":1}');
+  });
 });

@@ -5,7 +5,7 @@ if (Array.isArray(s) && s.length === 0) return '[]';
 if (typeof s === 'object' && Object.keys(s).length === 0) return '{}';
 if (typeof s === 'boolean') return s;
 if (typeof s === 'number') return s;
-if (typeof s === 'undefined') return s;
+
 
 if (Array.isArray(s)) {
     var newArr = "["
@@ -20,8 +20,10 @@ if (Array.isArray(s)) {
     var newObj = "{"
     var res = '';
     for (var el in s) {
+        if (s[el] !== undefined) {
         res += stringifyjson(el) + ':' 
         + stringifyjson(s[el]) + ','
+        }
     }
     res = res.slice(0, res.length - 1);
     var endBracket = "}"
@@ -30,3 +32,6 @@ if (Array.isArray(s)) {
 }
 
 module.exports = stringifyjson;
+
+
+// if (!el == undefined)
